@@ -12,19 +12,22 @@ public class Usuario {
     
     private String codigo;
     private String nombre;
+    private String genero;
     private String contrasena;
     public String rol;
 
-    public Usuario(String codigo, String nombre, String contrasena, String rol) {
+    public Usuario(String codigo, String nombre, String contrasena, String rol, String genero) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.genero = genero;
         this.contrasena = contrasena;
         this.rol = rol;
     }
 
-    public Usuario(String codigo, String nombre, String contrasena) {
+    public Usuario(String codigo, String nombre, String contrasena, String genero) {
         this.codigo = codigo;
         this.nombre = nombre;
+        this.genero = genero;
         this.contrasena = contrasena;
         this.rol = "";
     }
@@ -57,6 +60,14 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
     
     

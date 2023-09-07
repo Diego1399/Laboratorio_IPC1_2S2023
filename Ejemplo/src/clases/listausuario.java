@@ -70,4 +70,8 @@ public class listausuario {
                            "\t Rol: " + usuario.getRol());
         }
     }
+
+    public ArrayList<Usuario> getLista() {
+        return lista;
+    }
 }

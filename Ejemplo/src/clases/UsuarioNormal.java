@@ -12,8 +12,8 @@ public class UsuarioNormal extends Usuario{
     private String[] historial;
     private int contador;
 
-    public UsuarioNormal(String codigo, String nombre, String contrasena) {
-        super(codigo, nombre, contrasena);
+    public UsuarioNormal(String codigo, String nombre, String contrasena, String genero) {
+        super(codigo, nombre, contrasena, genero);
         this.historial = new String[100];
         this.contador = 0;
     }

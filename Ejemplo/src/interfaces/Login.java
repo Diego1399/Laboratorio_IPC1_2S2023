@@ -16,7 +16,6 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    
     listausuario lista = ejemplo4.Ejemplo4.lista;
     
     public Login() {
@@ -116,27 +115,30 @@ public class Login extends javax.swing.JFrame {
     private void ingresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarBtnActionPerformed
         // TODO add your handling code here:
         
-        
         String nuevoUser = usernameTxt.getText();
         String nuevoPass = passwordTxt.getText();
-        
         lista.mostrar();
+        
+        if (nuevoPass.equalsIgnoreCase("admin123") && nuevoUser.equals("admin")) {
+            this.setVisible(false);
+            inicioAdmin ventana = new inicioAdmin();
+            ventana.setVisible(true);
+        }
+        
         
         Usuario nuevo = new Usuario(nuevoUser, nuevoPass);
         
         if (lista.Validar(nuevo)) {
             Usuario actual = lista.getItem(nuevo);
             
-            if(actual.getRol().equalsIgnoreCase("Administrador")){
-                this.setVisible(false);
-                inicioAdmin ventana = new inicioAdmin();
-                ventana.setVisible(true);
-            } else {
+            if (!actual.getRol().equalsIgnoreCase("Administrador")) {
                 this.setVisible(false);
                 inicioNormal ventana = new inicioNormal();
                 ventana.setVisible(true);
             }
         }
+        
+        
         
     }//GEN-LAST:event_ingresarBtnActionPerformed
 

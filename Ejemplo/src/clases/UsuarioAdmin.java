@@ -10,8 +10,8 @@ package clases;
  */
 public class UsuarioAdmin extends Usuario{
     
-    public UsuarioAdmin(String codigo, String nombre, String contrasena, String rol) {
-        super(codigo, nombre, contrasena, rol);
+    public UsuarioAdmin(String codigo, String nombre, String contrasena, String rol, String genero) {
+        super(codigo, nombre, contrasena, rol, genero);
     }
     
     public boolean esAdmin() {

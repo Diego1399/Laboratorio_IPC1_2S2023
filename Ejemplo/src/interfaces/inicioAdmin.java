@@ -4,6 +4,19 @@
  */
 package interfaces;
 
+import clases.Usuario;
+import clases.listausuario;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 /**
  *
  * @author diego
@@ -13,12 +26,56 @@ public class inicioAdmin extends javax.swing.JFrame {
     /**
      * Creates new form inicioAdmin
      */
+    listausuario lista = ejemplo4.Ejemplo4.lista;
+    private DefaultTableModel model;
+
+    int cantidad_H;
+    int cantidad_M;
+
     public inicioAdmin() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Menu Inicial");
+
+        cargarUsuarios();
+    }
+
+    public void cargarUsuarios() {
+        ArrayList<Usuario> usuarios = lista.getLista();
+        int contador = 1;
+
+        model = new DefaultTableModel();
+        model.setColumnIdentifiers(new Object[]{"No.", "Codigo", "Nombre", "Genero", "Rol"});
+
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario.getNombre());
+
+            String numero = Integer.toString(contador);
+            String[] fila = {numero, usuario.getCodigo(),
+                usuario.getNombre(), usuario.getGenero(),
+                usuario.getRol()
+            };
+
+            model.addRow(fila);
+            contador++;
+        }
+
+        jTable1.setModel(model);
+    }
+
+    public void contarGenero() {
+        ArrayList<Usuario> usuarios = lista.getLista();
+        cantidad_H = 0;
+        cantidad_M = 0;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getGenero().equalsIgnoreCase("H")) {
+                cantidad_H++;
+            } else if (usuario.getGenero().equalsIgnoreCase("M")) {
+                cantidad_M++;
+            }
+        }
     }
 
     /**
@@ -32,6 +89,11 @@ public class inicioAdmin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,16 +106,61 @@ public class inicioAdmin extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "No.", "Codigo", "Nombre", "Genero", "Administrador"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel2.setText("Usuarios");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jButton2.setText("Graficar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(0, 339, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,7 +169,15 @@ public class inicioAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,10 +190,55 @@ public class inicioAdmin extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
 
-    
+        contarGenero();
+        
+        System.out.println(cantidad_H);
+        System.out.println(cantidad_M);
+
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        datos.setValue(cantidad_H, "Cantidad", "Hombres");
+        datos.setValue(cantidad_M, "Cantidad", "Mujeres");
+
+        JFreeChart grafica_barra = ChartFactory.createBarChart(
+                       "Generos de Usuarios", // Titulo de la grafica
+                       "Cantidad de usuario", // nombre de las columnas
+                       "Cantidad", // nombre de la numeracion
+                       datos, // datos de la grafica
+                       PlotOrientation.VERTICAL, // orientacion
+                       true, // legenda de barras individuales
+                       true, //herramientas
+                       false); // url
+        
+        DefaultPieDataset datos1 = new DefaultPieDataset();
+        datos1.setValue("Hombres", cantidad_H);
+        datos1.setValue("Mujeres", cantidad_M);
+        
+        grafica_barra = ChartFactory.createPieChart("Generos de Usuarios", datos1);
+        
+        ChartPanel panel = new ChartPanel(grafica_barra);
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(400, 200));
+        
+        
+        jPanel1.setLayout(new BorderLayout());
+        jPanel1.add(panel, BorderLayout.NORTH);
+        
+        pack();
+        repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 }
