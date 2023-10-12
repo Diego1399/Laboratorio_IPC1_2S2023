@@ -15,4 +15,10 @@ export class ServicioService {
     console.log(`${this.UrlBackend}/user`)
     return this.http.get<usuario>(`${this.UrlBackend}/user`);
   }
+
+  PostUsuario(user: any) {
+    console.log(`${this.UrlBackend}/login`)
+    const options = {responseType: 'text' as 'json'}; 
+    return this.http.post(`${this.UrlBackend}/login`, user, options);
+  }
 }
