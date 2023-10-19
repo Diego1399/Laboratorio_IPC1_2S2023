@@ -1,4 +1,4 @@
 export class usuario {
-    name: String | undefined;
+    correo: String | undefined;
     password: String | undefined;
 }

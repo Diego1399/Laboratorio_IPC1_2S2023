@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
 import { usuario } from '../modelos/usuarios'
+import { medicina } from '../modelos/medicina';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class ServicioService {
   PostUsuario(user: any) {
     console.log(`${this.UrlBackend}/login`)
     const options = {responseType: 'text' as 'json'}; 
-    return this.http.post(`${this.UrlBackend}/login`, user, options);
+    return this.http.post<any>(`${this.UrlBackend}/login`, user, options);
+  }
+
+  GetMedicinas() {
+    return this.http.get<medicina[]>(`${this.UrlBackend}/medicina`);
   }
 }
