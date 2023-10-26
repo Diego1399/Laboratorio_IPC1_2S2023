@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+<p>login works!</p>
+<h1>Hola estudiantes de IPC 1 Seccion B</h1>
+<form>
+  <label>Correo</label>
+  <input type="text" [(ngModel)]="correo" name="correo"><br>
+  <label>Contraseña</label>
+  <input type="password" [(ngModel)]="password" name="password"><br>
+  <button (click)="login2()"> Enviar</button><br>
+  <label>{{mensaje}}</label>
+</form>

@@ -1,7 +1,8 @@
 export class medicina {
-    id!: number;
-    name!: String;
-    descripcion!: String;
-    precio!: number;
-    cantidad!: number;
+    id: number | undefined;
+    name: String | undefined;
+    descripcion: String | undefined;
+    precio: number | undefined;
+    cantidad: number | undefined;
+    img: String | undefined;
 }
