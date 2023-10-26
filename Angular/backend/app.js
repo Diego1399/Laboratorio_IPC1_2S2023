@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import { listasPaciente, listaMedicina } from './datos/listas.js'
+import { listacitas } from './datos/tablas.js'
 
 const app = express();
 
@@ -45,7 +46,7 @@ app.post('/login', function(req, res) {
     console.log(usuario)
 
     if(usuario) {
-        res.send(JSON.stringify({msg: "Inicio sesion exitoso", data: true}))
+        res.send(JSON.stringify({msg: "Inicio sesion exitoso", data: true, user: usuario}))
     } else{
         res.send(JSON.stringify({msg: "Credenciales incorrectas", data: false}))
     }
@@ -61,7 +62,21 @@ app.get('/medicinas', function(req, res) {
     res.send(listaMedicina)
 })
 
+app.post('/solicitarcita', function(req, res) {
+    const data = req.body
 
+    const nuevo = {
+        id: listacitas.length + 1,
+        fecha: data.fecha,
+        hora: data.hora,
+        motivo: data.motivo,
+        estado: 0,
+        paciente: data.motivo
+    }
+
+    listacitas.push(nuevo)
+    res.send(JSON.stringify({msg: "Cita solicitada correctamente"}))
+})
 
 app.listen(8000, () => {
     console.log('Server on port 8000')

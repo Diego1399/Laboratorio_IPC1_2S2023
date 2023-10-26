@@ -28,7 +28,7 @@ export class LoginComponent {
       this.mensaje = data.msg
 
       if(data.data == true) {
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home'], {queryParams: {body: JSON.stringify(data.user)}})
       }
 
     }, err => {

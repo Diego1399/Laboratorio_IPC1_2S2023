@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
+
 import { medicina } from 'src/app/modelos/medicina';
 import { pedido } from 'src/app/modelos/pedido';
 
@@ -21,9 +23,18 @@ export class HomeComponent implements OnInit{
 
   total: number = 0;
 
-  constructor(private service: ServicioService){}
+  usuario: any;
+
+  constructor(private service: ServicioService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      console.log(params)
+      this.usuario = JSON.parse(params.get('body') as string)
+      console.log(this.usuario)
+    })
+
+
     this.service.getMedicina().subscribe(data => {
       this.catalogo = data
 

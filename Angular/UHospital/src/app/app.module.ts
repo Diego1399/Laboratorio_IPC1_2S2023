@@ -12,6 +12,7 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { PerfilpacienteComponent } from './componentes/perfilpaciente/perfilpaciente.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { SolicitarComponent } from './componentes/solicitar/solicitar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HomeComponent } from './componentes/home/home.component';
     NavbarComponent,
     RegistroComponent,
     PerfilpacienteComponent,
-    HomeComponent
+    HomeComponent,
+    SolicitarComponent
   ],
   imports: [
     BrowserModule,
